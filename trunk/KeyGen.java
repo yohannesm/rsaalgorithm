@@ -5,7 +5,7 @@ import java.math.*;
 public class KeyGen{
 public static void main(String[] args) {
    
-// 2/26 1:35
+// 2/26 1:35-2:00
 // Marcell is driving
    long d = -1;
    long e = -1;
@@ -32,7 +32,7 @@ public static void main(String[] args) {
    d = Euclid(e, phi);
    }
 
-// 2/26 2:20
+// 2/26 2:20-2:30
 // David is driving
    try {
        FileWriter fw = new FileWriter("key.txt");
@@ -45,7 +45,7 @@ public static void main(String[] args) {
    }
    
 	}// end main
-// 2/26 1:30
+// 2/26 1:30-2:00
 // Marcell is driving
 public static long getPrime(int bitLen){
  long result = 0;
@@ -56,7 +56,7 @@ public static long getPrime(int bitLen){
  return result;
 }// end getPrime
 
-// 2/26 1:45
+// 2/26 1:45-2:00
 // Marcell is driving
 //make sure e is always a (e.g. first argument)
 public static long Euclid(long a, long b){
