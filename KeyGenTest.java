@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 
 public class KeyGenTest {
 
-    // 2/26 2:00 pm
+    // 2/26 2:00-2:30 pm
     // David is driving
     @Test
     public void test1() {
