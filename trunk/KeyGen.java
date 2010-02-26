@@ -1,11 +1,17 @@
 import java.util.*;
 import java.io.*;
+import java.math.*;
 
 public class KeyGen{
 public static void main(String[] args) {
    
 // 2/26 1:35
 // Marcell is driving
+   long d = -1;
+   long e = -1;
+   long n = -1;
+   while (e < 2 || d < 2 || n < Math.pow(2, 24) || n >= Math.pow(2, 30)) {
+   
    Random r1 = new Random();
    //will give random number between 12-14
    int temp1 = r1.nextInt(3) + 12;
@@ -13,17 +19,31 @@ public static void main(String[] args) {
    //generate our primes p, q
    long p = getPrime(temp1);
    long q = getPrime(temp2);
-   long n = p * q;
+   n = p * q;
    long phi = (p-1) * (q-1);
    //create e < n
    int temp3 = r1.nextInt(20) + 2;
-   long e = getPrime(temp3);
+   e = getPrime(temp3);
 
    while(phi %  e == 0){
    temp3 = r1.nextInt(20) + 2;
    e = getPrime(temp3);
    }
-   long d = Euclid(e, phi);
+   d = Euclid(e, phi);
+   }
+
+// 2/26 2:20
+// David is driving
+   try {
+       FileWriter fw = new FileWriter("key.txt");
+       fw.write(String.valueOf(n) + "\n");
+       fw.write(String.valueOf(e) + "\n");
+       fw.write(String.valueOf(d) + "\n");
+       fw.close();
+   } catch (Exception E) {
+       System.err.println(E.getMessage() );
+   }
+   
 	}// end main
 // 2/26 1:30
 // Marcell is driving
@@ -41,6 +61,7 @@ public static long getPrime(int bitLen){
 //make sure e is always a (e.g. first argument)
 public static long Euclid(long a, long b){
   long u = a, v = b, s = 1, t = 0, c = 0, d = 1;
+  long q;
   while(v != 0){
   q = u/v;
   long temp = u;
@@ -53,8 +74,9 @@ public static long Euclid(long a, long b){
   c = tempS - c*q;
   d = tempT - d*q;
   }
- // c is d for (e,d) pair
- return c;
+ // s is d for (e,d) pair
+
+ return s;
 }
 
 }// end class KeyGen
