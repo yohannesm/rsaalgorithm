@@ -20,4 +20,12 @@ public class KeyGenTest {
         long c = KeyGen.Euclid(a, b);
         assertEquals(23, c);
     }
+    @Test
+    public void test3(){
+    	long[] test = KeyGen.keyGen();
+	long e = test[1];
+	long d = test[2];
+	long phi = test[3];
+	assertEquals( 1, (e*d)%phi);
+    }
 }
