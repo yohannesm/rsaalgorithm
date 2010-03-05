@@ -33,6 +33,14 @@ public static void encrypt(String inFile, String keyFile)throws Exception{
   long D = readKey(keyReader);
   keyReader.close();
 
+  //Assert that the keys are within the correct value range
+  assert( N >= 16777216 );
+  assert( N < 1073741824);
+  assert( E > 0 );
+  assert( D > 0 );
+  assert( E < N );
+  assert( D < N );
+
   FileInputStream input = new FileInputStream(inFile);
   FileOutputStream output = new FileOutputStream("encrypted");
 
@@ -54,7 +62,6 @@ public static void encrypt(String inFile, String keyFile)throws Exception{
   for (int i = 3; i >= 0; i--)
   {
       outputByte[i] = mask & (int)outputNum;
-      System.out.println(outputByte[i]);
       outputNum = outputNum >>> 8;
   }
   for (int i = 0; i < 4; i++)
@@ -90,6 +97,14 @@ public static void decrypt(String inFile, String keyFile) throws Exception{
   long D = readKey(keyReader);
   keyReader.close();
 
+  //Assert that the keys are within the correct value range
+  assert( N >= 16777216 );
+  assert( N < 1073741824);
+  assert( E > 0 );
+  assert( D > 0 );
+  assert( E < N );
+  assert( D < N );
+
   FileInputStream input = new FileInputStream(inFile);
   FileOutputStream output = new FileOutputStream("decrypted");
 
@@ -111,12 +126,11 @@ public static void decrypt(String inFile, String keyFile) throws Exception{
   for (int i = 2; i >= 0; i--)
   {
       outputByte[i] = mask & (int)outputNum;
-      System.out.println(outputByte[i]);
       outputNum = outputNum >>> 8;
   }
   for (int i = 0; i < 3; i++)
   {
-      if (outputByte[i] != 0) output.write(outputByte[i]);
+      if (outputByte[i] != 0 || input.available() > 0) output.write(outputByte[i]);
   }
 
   }//end while

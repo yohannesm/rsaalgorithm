@@ -1,3 +1,19 @@
+/* Pair Programming Log
+
+2/26, 1:30 - 5:00, David and Marcell, 7 hours
+3/3, 1:20 - 1:50, David and Marcell, 1 hour
+3/6, 2:50 - 3:20, David and Marcell, 1 hour
+total time 9 hours, 9 hours of pair programming
+
+We had to refer to Java documentation pretty frequently. The most difficult
+parts were file I/O.
+
+We learned more about the Euclidean algorithm, how it works and what the final
+result was. In earlier versions of the algorithm, we were returning the wrong
+value and unit tests helped us figure out what went wrong.
+
+*/
+
 import java.util.*;
 import java.io.*;
 import java.math.*;
@@ -68,7 +84,7 @@ public static long[] keyGen(){
    long e = -1;
    long n = -1;
    long phi = -1;
-   while (e < 2 || d < 2 || n < Math.pow(2, 24) || n >= Math.pow(2, 30)) {
+   while (e < 2 || d < 2 || n < Math.pow(2, 24) || n >= Math.pow(2, 30) || e >= phi || d >= phi) {
    
    Random r1 = new Random();
    //will give random number between 12-14
@@ -80,7 +96,7 @@ public static long[] keyGen(){
    n = p * q;
    phi = (p-1) * (q-1);
    //create e < n
-   int temp3 = r1.nextInt(20) + 2;
+   int temp3 = r1.nextInt(8) + 2;
    e = getPrime(temp3);
 
    while(phi %  e == 0){
@@ -89,11 +105,22 @@ public static long[] keyGen(){
    }
    d = Euclid(e, phi);
    }
+   //Make assertions that the values n, e, d and phi have the right values
+   assert( n >= 16777216 );
+   assert( n < 1073741824);
+   assert( phi < n );
+   assert( e < phi );
+   assert( d < phi );
+   assert( e > 0 );
+   assert( d > 0 );
+   assert( (e * d) % phi == 1);
+
    long[] result = new long[4];
    result[0] = n;
    result[1] = e;
    result[2] = d;
    result[3] = phi;
+
     
     return result;
   }//end keyGen method 

@@ -5,6 +5,8 @@ public class KeyGenTest {
 
     // 2/26 2:00-2:30 pm
     // David is driving
+
+    //Test that our extended Euclid algorithm returns correct values
     @Test
     public void test1() {
         long a = 259;
@@ -20,6 +22,8 @@ public class KeyGenTest {
         long c = KeyGen.Euclid(a, b);
         assertEquals(23, c);
     }
+
+    //Test that our KeyGen returns valid keys
     @Test
     public void test3(){
     	long[] test = KeyGen.keyGen();
